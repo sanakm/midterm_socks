@@ -7,7 +7,10 @@
     <li><%= service.socks_per_month %></li>
     <li><%= service.cost %> </li>
   </h3>
-</li>
+</div>
+<% @service_cost = service.name.cost %>
+<p> Item cost: <%= @service_cost %> </p>
+<p>  Total cost: <%= @service_cost * 0.15 %> </p>
 </div>
 <% end %>
 
