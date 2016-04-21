@@ -24,16 +24,21 @@ get '/login' do
 end
 
 post '/login'do
-user = User.where(email: params[:email]).where(password: params[:password]).first
-if user && user[:password] == params[:password]
-  session[:user_id] = user[:id]
-  redirect '/customers'
+  user = User.where(email: params[:email]).where(password: params[:password]).first
+  if user && user[:password] == params[:password]
+    session[:user_id] = user[:id]
+    redirect '/customers'
+  else
+    session[:login_error] = "You must be logged in."
+    redirect '/'
+  end
 end
-redirect '/'
+
+get '/customers' do
+  erb :'customers/index'
 end
 
 get '/customers/checkout' do
-  @services = Service.all
   erb :'customers/checkout'
 end
 
@@ -56,9 +61,6 @@ post '/customers/checkout' do
  end
 end
 
-get '/customers' do
-  erb :'customers/index'
-end
 
 # get '/customers/comments' do
 #   erb :'customers/new'
@@ -75,7 +77,7 @@ get '/logout'do
   redirect '/' 
 end
 
-get '/customers/pay' do
+get '/pay' do
   check_user
   @services = Service.all
   erb :'customers/pay'
