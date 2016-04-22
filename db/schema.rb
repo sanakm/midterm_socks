@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420191659) do
+ActiveRecord::Schema.define(version: 20160422001051) do
 
   create_table "comments", force: :cascade do |t|
     t.text    "description"
@@ -32,10 +32,10 @@ ActiveRecord::Schema.define(version: 20160420191659) do
 
   create_table "services", force: :cascade do |t|
     t.string   "name"
-    t.string   "socks_per_month"
+    t.integer  "socks_per_month"
     t.integer  "cost"
-    t.datetime "service_start"
-    t.date     "service_end"
+    t.datetime "created_at"
+    t.date     "updated_at"
   end
 
   create_table "sizes", force: :cascade do |t|
