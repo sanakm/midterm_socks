@@ -33,6 +33,7 @@ password = params[:password]
   if user
     session[:user_id] = user.id
     redirect '/customer/index'
+
   else
     session[:login_error] = "You must be logged in."
     redirect '/'
@@ -41,7 +42,7 @@ end
 
 get '/logout' do
   session[:user_id] = nil
-  redirect '/' 
+  redirect '/'
 end
 
 get '/customer/checkout/:id' do
@@ -57,11 +58,12 @@ post '/customer/checkout' do
   session[:name] = params[:name]
   session[:email] = params[:email]
   session[:password] = params[:password]
-  if params[:password] == params[:password_confirmation] 
+  if params[:password] == params[:password_confirmation]
     redirect '/customer/checkout2'
   else
     redirect '/customer/checkout'
-  end 
+  end
+
 end
 
 get '/customer/checkout2' do
@@ -75,7 +77,8 @@ post '/customer/checkout2' do
   session[:city] = params[:city]
   session[:postalcode] = params[:postalcode]
   redirect '/customer/checkout3'
-end 
+end
+
 
 get '/customer/checkout3' do
   erb :'customer/checkout3'
@@ -126,7 +129,7 @@ post '/customer/checkout2' do
   session[:city] = params[:city]
   session[:postalcode] = params[:postalcode]
   redirect '/customer/checkout3'
-end 
+end
 
 get '/customer/checkout3' do
   erb :'customer/checkout3'
@@ -144,19 +147,22 @@ post '/customer/checkout3' do
       # services_id: @services_id
       )
     #user.service= Service.find(session[:services_id])
-  user.save
-  session[:user_id] = user.id
-  redirect '/customer/profile'
+
+    user.save
+    session[:user_id] = user.id
+    redirect '/customer/index'
+  end
+
+
+
+get '/customer/index' do
+  check_user
+  erb :'customer/index'
 end
 
-
-get '/customer/profile' do
+post '/customer/index' do
   check_user
-  erb :'customer/profile'
-end
 
-post '/customer/profile' do
-  check_user
 end
 
 
@@ -172,4 +178,3 @@ end
 # get '/newuser' do
 #   erb :newuser
 # end
-
