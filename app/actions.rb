@@ -28,7 +28,7 @@ post '/login'do
   email = params[:email]
   password = params[:password]
   user = User.find_by(email: email, password: password)
-  if user 
+  if user
     session[:user_id] = user[:id]
     redirect '/customer/profile'
   else
@@ -39,7 +39,7 @@ end
 
 get '/logout'do
   session[:user_id] = nil
-  redirect '/' 
+  redirect '/'
 end
 
 
@@ -53,9 +53,9 @@ post '/customer/checkout' do
   session[:name] = params[:name]
   session[:email] = params[:email]
   session[:password] = params[:password]
-  if params[:password] == params[:password_confirmation] 
+  if params[:password] == params[:password_confirmation]
     redirect '/customer/checkout2'
-  end 
+  end
 end
 
 get '/customer/checkout2' do
@@ -68,7 +68,7 @@ post '/customer/checkout2' do
   session[:city] = params[:city]
   session[:postalcode] = params[:postalcode]
     redirect '/customer/checkout3'
-  end 
+  end
 
   get '/customer/checkout3' do
     erb :'customer/checkout3'
@@ -88,18 +88,18 @@ post '/customer/checkout2' do
     #user.service= Service.find(session[:services_id])
     user.save
     session[:user_id] = user.id
-    redirect '/customer/profile'
+    redirect '/customer/index'
   end
 
 
-get '/customer/profile' do
+get '/customer/index' do
   check_user
-  erb :'customer/profile'
+  erb :'customer/index'
 end
 
-post '/customer/profile' do
+post '/customer/index' do
   check_user
-  
+
 end
 
 
@@ -115,4 +115,3 @@ end
 # get '/newuser' do
 #   erb :newuser
 # end
-
