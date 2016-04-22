@@ -1,0 +1,20 @@
+<h1>User Personal Information</h1>
+<form method="POST" action='/customer/checkout2'>
+
+  <input type="hidden" name="service_id" value="<%= @services_id %>">
+
+  <label>Phone:</label>
+  <input type="text" name="phone">
+
+  <label>Address:</label>
+  <input type="text" name="address">
+
+  <label>City:</label>
+  <input type="text" name="city">
+
+  <label>Postal Code:</label>
+  <input type="text" name="postalcode">
+
+  <p><input type="submit" value="Go!"></p>
+
+</form>
