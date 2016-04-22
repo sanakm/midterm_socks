@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 20160422153857) do
+=======
 ActiveRecord::Schema.define(version: 20160422001051) do
+>>>>>>> ad05b8aeff1abbbec0e128f542d7dadfebced121
 
   create_table "comments", force: :cascade do |t|
     t.text    "description"
@@ -43,11 +47,11 @@ ActiveRecord::Schema.define(version: 20160422001051) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.boolean  "account_type", default: false
+    t.boolean  "account_type",    default: false
     t.string   "name"
     t.string   "email"
     t.string   "phone"
-    t.string   "password"
+    t.string   "password_digest"
     t.string   "address"
     t.string   "city"
     t.string   "postalcode"
