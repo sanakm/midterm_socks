@@ -1,21 +1,15 @@
-<div>
-  <a href="/customers/shipping">Edit Shipping</a>
-</div>
-<div>
-  <a href="/customers/orders">Edit Order</a>
-</div>
-<div>
-  <a href="/customers/records">View history</a>
-</div>
-<div>
-  <a href="/customer/sosorry">Post Complaint</a>
-</div>
-<div>
-  <a href="/customer/attaboy">Post Complement</a>
-</div>
-<div>
-  <a href="mailto:name@email.com">Contact Us!</a>
-</div>
+<h1>Change personal info</h1>
 
+<form method="POST" action='/customer/checkout'>
+    
+  <label>Name:</label>
+  <input type="text" name="name" value="<%= @user.name %>">
+  
+  <label>Email:</label>
+  <input type="text" name="email" value="<%= @user.email %>">
+
+  <p><input type="submit" value="Go!"></p>
+
+</form>
 
 
