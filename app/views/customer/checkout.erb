@@ -1,6 +1,8 @@
 <h1>User Personal Information</h1>
-<form method="POST" action='/customers/checkout'>
-  
+<form method="POST" action='/customer/checkout'>
+    
+  <input type="hidden" name="service_id" value="<%= @services_id %>">
+
   <label>Name:</label>
   <input type="text" name="name">
   
@@ -13,20 +15,6 @@
   <label>Password Confirmation:</label>
   <input type="text" name="password_confirmation">
 
-  <label>Phone:</label>
-  <input type="text" name="phone">
-
-  <label>Address:</label>
-  <input type="text" name="address">
-
-  <label>City:</label>
-  <input type="text" name="city">
-
-  <label>Postal Code:</label>
-  <input type="text" name="postalcode">
-
-  <a href="/pay">Continue</a>
-
-  <a href="/logout">Log out</a>
+  <p><input type="submit" value="Go!"></p>
 
 </form>
