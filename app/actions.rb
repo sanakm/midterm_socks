@@ -143,13 +143,16 @@ end
 post '/customer/compliment' do
   check_user
   user = User.find_by(id: session[:user_id])
-  @result = params['orig']
+  comment = Comment.new(description: params['orig'], feedback: "compliment", users_id: session[:user_id])
+  comment.save
   redirect 'customer/index'
 end
 
 post '/customer/complaint' do
   check_user
   user = User.find_by(id: session[:user_id])
+  complaint = Comment.new(description: params['orig'], feedback: "complaint", users_id: session[:user_id])
+  complaint.save
   redirect 'customer/index'
 end
 
@@ -157,6 +160,13 @@ end
 #   check_user && is_employee
 #   erb :'employee/index'
 # end
+
+
+get '/employee' do
+  check_user && is_employee
+  erb :'employee/index'
+end
+
 
 
 
