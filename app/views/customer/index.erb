@@ -1,5 +1,8 @@
 <h1>Welcome back <%= @user.name %></h1>
 <div>
+  <a href="/customers/profile">Edit Info</a>
+</div>
+<div>
   <a href="/customers/shipping">Edit Shipping</a>
 </div>
 <div>
@@ -68,7 +71,18 @@
   
 </form>
 
+<h1>Customer Compliment</h1>
+<form action='/customer/compliment' method="post">
+<textarea rows="4" cols="30" name="orig" placeholder="Enter text here.."></textarea>
+<button type="submit">Submit</button>
+</form>
 
+
+<h1>Customer Complaint</h1>
+<form action='/customer/complaint' method="post">
+<textarea rows="4" cols="30" name="orig" placeholder="Enter text here.."></textarea>
+<button type="submit">Submit</button>
+</form>
 
 
 
