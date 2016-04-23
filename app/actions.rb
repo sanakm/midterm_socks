@@ -12,6 +12,16 @@ helpers do
     end
   end
 
+  def is_employee?
+    @user = User.find_by(id: session[:user_id])
+    if @user.account_type
+       session.delete(:login_error)
+    else
+      session[:login_error] = "You are not authorized to see this page"
+      redirect '/login'
+    end
+  end
+
 end
 
 # TODO REMOVE ONCE EMPLPOYEE PAGES ARE CONSOLIDATED
@@ -84,19 +94,9 @@ get '/customer/index' do
   erb :'customer/index'
 end
 
-get '/customer/profile' do
-  check_user
-  erb :'customer/profile'
-end
-
 post '/customer/index' do
   check_user
   erb :'customer/index'
-end
-
-get '/customer/profile' do
-  check_user
-  erb :'customer/profile'
 end
 
 post '/customer/profile' do
@@ -125,10 +125,32 @@ end
 
 get '/customer/order' do
   check_user
-
 end
 
+get '/employee' do
+  check_user && is_employee
+  erb :'employee/index'
+end
 
+# get '/employee/compliments' do
+#   check_user && is_employee
+#   erb :'employee/compliments'
+# end
+
+# get '/employee/complaints' do
+#   check_user && is_employee
+#   erb :'employee/complaints'
+# end
+
+# get '/employee/orderhistory' do
+#   check_user && is_employee
+#   erb :'employee/orderhistory'
+# end
+
+# get '/employee/nextorders' do
+#   check_user && is_employee
+#   erb :'employee/nextorders'
+# end
 
 # get '/customer/comments' do
 #   erb :'customer/new'
