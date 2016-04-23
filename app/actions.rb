@@ -14,7 +14,10 @@ helpers do
 
 end
 
-
+# TODO REMOVE ONCE EMPLPOYEE PAGES ARE CONSOLIDATED
+get '/brian_employee' do
+  erb :'employee/index_brian'
+end
 
 get '/' do
   erb :index
