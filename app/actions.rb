@@ -40,8 +40,12 @@ get '/logout' do
   redirect '/'
 end
 
-get '/customer/checkout' do
-  #session[:service_id] = params[:id].to_i
+get '/customer' do
+  erb :'customer/index_future'
+end
+
+get '/customer/checkout/:id' do
+  session[:service_id] = params[:id].to_i
   erb :'customer/checkout'
 end
 
@@ -112,7 +116,7 @@ end
 
 get '/customer/order' do
   check_user
-  
+
 end
 
 
