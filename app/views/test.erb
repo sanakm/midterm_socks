@@ -1,0 +1,37 @@
+<h1>TESTING TIME</h1>
+
+<div id="success">
+  Hip Hip Hooray
+
+</div>
+
+<div id="failure">
+  Boo Urns
+</div>
+
+
+<script>
+$(document).ready(function(){
+  var foo = -1
+  var foo = <%= @value %>
+  console.log(foo)
+  $("div").hide();
+  if (foo == 1){
+    $("div#success").show();
+  }
+  else{
+    $("div#failure").show();
+  }
+});
+
+
+
+</script>
+
+<p>Hopefully, there's going to be some text above...</p>
+
+<% if @value == 1 %>
+  <h2> hip hip hooray!</h2>
+<% else %>
+  <h3> No magic here...</h3>
+<% end %>
