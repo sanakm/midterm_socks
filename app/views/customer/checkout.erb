@@ -1,20 +1,38 @@
+<% if @user && @user.errors %>
+test
+<% end %>
+
 <h1>User Personal Information</h1>
+
 <form method="POST" action='/customer/checkout'>
     
-  <input type="hidden" name="service_id" value="<%= @services_id %>">
+  <input type="hidden" name="service_id" value="<%= @service_id %>">
 
   <label>Name:</label>
-  <input type="text" name="name">
+  <input type="text" name="name" value="<%= @fields[:name] if @fields && @fields[:name] %>">
   
   <label>Email:</label>
-  <input type="text" name="email" value="<%= @user && @user.email %>">
+  <input type="text" name="email" value="<%= @fields[:email] if @fields && @fields[:email] %>">
 
   <label>Password:</label>
-  <input type="text" name="password" value="<%= @user && @user.password %>">
+  <input type="text" name="password" value="<%= @fields[:password] if @fields && @fields[:password] %>">
 
   <label>Password Confirmation:</label>
-  <input type="text" name="password_confirmation">
+  <input type="text" name="password_confirmation" value="<%= @fields[:password_confirmation] if @fields && @fields[:password_confirmation] %>">
+
+  <label>Address:</label>
+  <input type="text" name="address" value="<%= @fields[:address] if @fields && @fields[:address] %>">
+
+  <label>City:</label>
+  <input type="text" name="city" value="<%= @fields[:city] if @fields && @fields[:city] %>">
+
+  <label>Postal Code:</label>
+  <input type="text" name="postalcode" value="<%= @fields[:postalcode] if @fields && @fields[:postalcode] %>">
+
+  <label>Phone:</label>
+  <input type="text" name="phone" value="<%= @fields[:phone] if @fields && @fields[:phone] %>">
 
   <p><input type="submit" value="Go!"></p>
 
 </form>
+
