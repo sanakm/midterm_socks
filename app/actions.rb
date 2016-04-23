@@ -12,6 +12,16 @@ helpers do
     end
   end
 
+  def is_employee?
+    @user = User.find_by(id: session[:user_id])
+    if @user.account_type
+       session.delete(:login_error)
+    else
+      session[:login_error] = "You are not authorized to see this page"
+      redirect '/login'
+    end
+  end
+
 end
 
 get '/' do
@@ -116,9 +126,12 @@ end
 
 get '/customer/order' do
   check_user
-
 end
 
+get '/employee' do
+  check_user && is_employee
+  erb :'employee/index'
+end
 
 
 # get '/customer/comments' do
