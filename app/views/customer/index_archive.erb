@@ -1,0 +1,95 @@
+<h1>Welcome back <%= @user.name %></h1>
+<div>
+  <a href="/customers/profile">Edit Info</a>
+</div>
+<div>
+  <a href="/customers/shipping">Edit Shipping</a>
+</div>
+<div>
+  <a href="/customers/orders">Edit Order</a>
+</div>
+<div>
+  <a href="/customers/records">View history</a>
+</div>
+<div>
+  <a href="/customer/sosorry">Post Complaint</a>
+</div>
+<div>
+  <a href="/customer/attaboy">Post Complement</a>
+</div>
+<div>
+  <a href="mailto:name@email.com">Contact Us!</a>
+</div>
+
+<h1>Change personal info</h1>
+
+<form method="POST" action='/customer/profile'>
+    
+  <label>Name:</label>
+  <input type="text" name="name" value="<%= @user.name %>">
+  
+  <label>Email:</label>
+  <input type="text" name="email" value="<%= @user.email %>">
+
+  <p><input type="submit" value="Go!"></p>
+
+</form>
+
+<h1>Edit shipping</h1>
+
+<form method="POST" action='/customer/shipping'>
+
+  <label>Address:</label>
+  <input type="text" name="address" value="<%= @user.address %>">
+
+  <label>City:</label>
+  <input type="text" name="city" value="<%= @user.city %>">
+
+  <label>Postal Code:</label>
+  <input type="text" name="postalcode" value="<%= @user.postalcode %>">
+
+  <label>Phone:</label>
+  <input type="text" name="phone" value="<%= @user.phone %>">
+
+  <p><input type="submit" value="Go!"></p>
+
+</form>
+
+<h1>Edit Order</h1>
+
+<form method="POST" action='/customer/order'>
+
+  <input type="radio" name="subscription" value="fancy nany"> Fancy Nancy<br>
+
+  <input type="radio" name="subscription" value="the perfect pair"> The Perfect Pair<br>
+
+  <input type="radio" name="subscription" value="the miser"> The Miser<br>
+
+  <input type="radio" name="subscription" value="dilettante"> Dilettante 
+
+  <p><input type="submit" value="Go!"></p>
+  
+</form>
+
+<h1>Customer Compliment</h1>
+<form action='/customer/compliment' method="post">
+<textarea rows="4" cols="30" name="orig" placeholder="Enter text here.."></textarea>
+<button type="submit">Submit</button>
+</form>
+
+
+<h1>Customer Complaint</h1>
+<form action='/customer/complaint' method="post">
+<textarea rows="4" cols="30" name="orig" placeholder="Enter text here.."></textarea>
+<button type="submit">Submit</button>
+</form>
+
+
+
+
+
+
+
+
+
+

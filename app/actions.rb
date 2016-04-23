@@ -33,9 +33,6 @@ get '/' do
   erb :index
 end
 
-get '/register' do
-  erb :'/customer/register'
-end
 
 get '/login' do
   erb :login
@@ -57,10 +54,6 @@ end
 get '/logout' do
   session[:user_id] = nil
   redirect '/'
-end
-
-get '/customer' do
-  erb :'customer/index_future'
 end
 
 get '/customer/checkout/:id' do
@@ -91,7 +84,7 @@ end
 
 get '/customer/index' do
   check_user
-  erb :'customer/index'
+  erb :'customer'
 end
 
 post '/customer/profile' do
@@ -100,9 +93,8 @@ post '/customer/profile' do
   user.name = params[:name]
   user.email = params[:email]
   user.save
-  redirect 'customer/index'
+  redirect '/customer/index'
 end
-
 
 post '/customer/shipping' do
   check_user
@@ -112,15 +104,13 @@ post '/customer/shipping' do
   user.postalcode = params[:postalcode]
   user.phone = params[:phone]
   user.save
-  redirect 'customer/index'
+  redirect '/customer/index'
 end
 
 post '/customer/order' do
   check_user
   user = User.find_by(id: session[:user_id])
-
-
-  redirect 'customer/index'
+  redirect '/customer/index'
 end
 
 post '/customer/compliment' do
@@ -133,7 +123,7 @@ end
 post '/customer/complaint' do
   check_user
   user = User.find_by(id: session[:user_id])
-  redirect 'customer/index'
+  redirect '/customer/index'
 end
 
 
@@ -169,4 +159,3 @@ end
 # get '/newuser' do
 #   erb :newuser
 # end
-
