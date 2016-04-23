@@ -1,0 +1,109 @@
+
+
+<div class="navbar navbar-inverse" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" id = "menu-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+
+
+            <ul class="sidebar-nav">
+                <li>
+
+
+                <img src="assets/Socky.png" style=" width:120px;
+                                                height:120px;
+                                                background-color:white;
+                                                border-radius: 60px;
+                                                margin-top:10px;
+                                                margin-left: 15%;
+                                                "></img></li>
+
+
+
+
+                <li class="sidebar-brand">
+                    <a id="main_employee_page">
+                        Lets send some socks!
+                    </a>
+
+                    <br><br>
+                </li>
+                <li>
+                    <a id = "vieworder">What's our next order?</a>
+                </li>
+                <li>
+                    <a id = "viewhist">View our Shipped Orders</a>
+                </li>
+                <li>
+                    <a id = "sosorry_admin">Sort out the bad...</a>
+                </li>
+                <li>
+                    <a id = "attaboy_admin">Catch up on the good</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper" >
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12" >
+                        <div class="container" id="default_view">
+                            <h1> Welcome Back (name of employee)</h1>
+
+                            Idea for this page: How many days until we ship next orders (a simple time calc)
+                        </div>
+
+                        <div class="container" id="view_next_order">
+
+                          <h2>This is the next order!</h2>
+
+                          <p>Okay, I'll be honest. the code for this one's going to be the trickiest, and should be done in the actions.rb file.</p>
+                        </div>
+                        <div class="container" id="vieworder_hist">
+
+                            <h2>Past Order History</h2>
+
+                            <p>The Pseudocode for this page is pretty simple:
+                              For every order in the order history table, create a row of text that follows:
+
+                              Date of Order (order table) | Address Shipped | Name of person shipped | order type
+                            </p></div>
+                        <div class="container" id="view_action_complaints">
+
+                          <h2>View all, and action complaints</h2>
+
+                          <p>In this table, we're looking at the types of complaints, and the date of the complaint. Further action includes creating a way to show we followed up on the complaint.</p>
+                        </div>
+                        <div class="container" id="view_approve_compliments">
+
+                          <h2>Review Complements</h2>
+                          <p>In this table, we want to be able to review and approve comments. Here, there should be two tables.
+                            The first table is the non-approved comments. Here, each one should be able to be deleted, or approved.
+                            The second table should include approved comments only. No need to have a delete method. </p>
+                            </div>
+                          </div>
+                        </div>
+                      <!-- /#page-content-wrapper -->
+
+                    </div>
+    <!-- /#wrapper -->
