@@ -19,14 +19,19 @@ helpers do
    else
     session[:login_error] = "You are not authorized to see this page"
     redirect '/login'
+    end
   end
-end
 
 end
 
 # TODO REMOVE ONCE EMPLPOYEE PAGES ARE CONSOLIDATED
 get '/brian_employee' do
   check_user && is_employee
+  erb :'employee/index_brian'
+end
+
+get '/brian_employee' do
+  @comments = Comment.all
   erb :'employee/index_brian'
 end
 
