@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
   validates :phone, presence: true
-  validates :password_digest, presence: true, length: {minimum:6}
+  validates :password_digest, presence: true, length: {minimum:6, too_short: "Password must be at least six characters long, yo!"}
   validates :address, presence: true
   validates :city, presence: true
   validates :postalcode, presence: true
@@ -26,7 +26,5 @@ class User < ActiveRecord::Base
 
   # use this if above format doesn't work: validates_format_of :postalcode, with: /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/, :message => "is not a valid postal code"
 
-
-  # use this if above format doesn't work: validates_format_of :postalcode, with: /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/, :message => "is not a valid postal code"
 end
 

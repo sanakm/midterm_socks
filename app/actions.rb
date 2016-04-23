@@ -1,9 +1,7 @@
 require 'pry'
-# Homepage (Root path)
+
 helpers do
 
-  # Get logged-in user or redirects to login page
-  # Uses session[:login_error] to store an error message when needed
   def check_user
     @user = User.find_by(id: session[:user_id])
     if @user
@@ -24,7 +22,7 @@ get '/login' do
   erb :login
 end
 
-post '/login'do
+post '/login' do
   email = params[:email]
   password = params[:password]
   user = User.find_by(email: email, password_digest: password)
@@ -52,50 +50,25 @@ get '/customer/checkout/:id' do
 end
 
 post '/customer/checkout' do
-  session[:name] = params[:name]
-  session[:email] = params[:email]
-  session[:password] = params[:password]
-  if params[:password] == params[:password_confirmation]
-    redirect '/customer/checkout2'
+  @fields = params
+  @service_id = params[:service_id]
+  @user = User.new(
+    name: params[:name],
+    email: params[:email],
+    password_digest: params[:password],
+    address: params[:address],
+    city: params[:city],
+    postalcode: params[:postalcode],
+    phone: params[:phone],
+    #services_id: session[:service_id]
+  )
+  if @user.save
+    session[:user_id] = @user.id
+    redirect '/customer/index'
   else
-    redirect '/customer/checkout'
+    erb :'/customer/checkout'
   end
-
 end
-
-get '/customer/checkout2' do
-  erb :'customer/checkout2'
-end
-
-post '/customer/checkout2' do
-  session[:phone] = params[:phone]
-  session[:address] = params[:address]
-  session[:city] = params[:city]
-  session[:postalcode] = params[:postalcode]
-  redirect '/customer/checkout3'
-end
-
-
-get '/customer/checkout3' do
-  erb :'customer/checkout3'
-end
-
-post '/customer/checkout3' do
-  user = User.create(
-    name: session[:name],
-    email: session[:email],
-    phone: session[:phone],
-    password_digest: session[:password],
-    address: session[:address],
-    city: session[:city],
-    postalcode: session[:postalcode],
-    services_id: session[:service_id]
-    )
-  user.save
-  session[:user_id] = user.id
-  redirect '/customer/index'
-end
-
 
 get '/customer/index' do
   check_user
@@ -105,52 +78,6 @@ end
 get '/customer/profile' do
   check_user
   erb :'customer/profile'
-end
-
-post '/customer/profile' do
-  check_user
-  redirect 'customer/index'
-end
-
-get '/customer/shipping' do
-  check_user
-end
-
-get '/customer/checkout2' do
-  erb :'customer/checkout2'
-end
-
-post '/customer/checkout2' do
-  session[:phone] = params[:phone]
-  session[:address] = params[:address]
-  session[:city] = params[:city]
-  session[:postalcode] = params[:postalcode]
-  redirect '/customer/checkout3'
-end
-
-get '/customer/checkout3' do
-  erb :'customer/checkout3'
-end
-
-post '/customer/checkout3' do
-  user = User.create(
-    name: session[:name],
-    email: session[:email],
-    phone: session[:phone],
-    password_digest: session[:password],
-    address: session[:address],
-    city: session[:city],
-    postalcode: session[:postalcode],
-    services_id: session[:services_id]
-    )
-  user.save
-  session[:user_id] = user.id
-  redirect '/customer/index'
-  end
-
-get '/customer/index' do
-  check_user
-  erb :'customer/index'
 end
 
 post '/customer/index' do
@@ -164,11 +91,10 @@ get '/customer/profile' do
 end
 
 post '/customer/profile' do
-  #check_user
+  check_user
   user = User.find_by(id: session[:user_id])
   user.name = params[:name]
   user.email = params[:email]
-  #binding.pry
   user.save
   redirect 'customer/index'
 end
