@@ -42,7 +42,7 @@
 
                 <li class="sidebar-brand">
                     <a id="main_page">
-                        Welcome Back, [NAME]
+                        Welcome Back, <%= @user.name %>
                     </a>
 
                     <br><br>
@@ -68,6 +68,9 @@
                 <li>
                     <a href="mailto:name@email.com">Contact Us!</a>
                 </li>
+                <li>
+                  <a href="/logout">Sign Out</a>
+                </li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -78,7 +81,7 @@
                 <div class="row">
                     <div class="col-lg-12" >
                         <div class="container" id="default_stuff">
-                            <h1> Default stuff is here, okay?</h1>
+                            <h1> Welcome back, <%= @user.name %></h1>
                         </div>
 
                         <div class="container" id="edit_profile">
@@ -104,7 +107,7 @@
 
                             <h2>Edit Shipping Deets</h2>
 
-                            form method="POST" action='/customer/shipping'>
+                            <form method="POST" action='/customer/shipping'>
 
                               <label>Address:</label>
                               <input type="text" name="address" value="<%= @user.address %>">
@@ -189,5 +192,3 @@
 
     </div>
     <!-- /#wrapper -->
-
-    
