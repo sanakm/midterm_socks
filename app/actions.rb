@@ -24,8 +24,14 @@ helpers do
 
 end
 
+
+
 get '/' do
   erb :index
+end
+
+get '/register' do
+  erb :'/customer/register'
 end
 
 get '/login' do
