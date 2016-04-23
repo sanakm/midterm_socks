@@ -96,20 +96,17 @@ post '/customer/checkout' do
     phone: params[:phone],
     #services_id: session[:service_id]
     )
+
+
   if @user.save
     session[:user_id] = @user.id
     redirect '/customer/index'
   else
-    erb :'/customer/checkout'
+    redirect "/customer/checkout/#{session[:service_id]}"
   end
 end
 
 get '/customer/index' do
-  check_user
-  erb :'customer/index'
-end
-
-post '/customer/index' do
   check_user
   erb :'customer/index'
 end
@@ -123,10 +120,6 @@ post '/customer/profile' do
   redirect 'customer/index'
 end
 
-get '/customer/shipping' do
-  check_user
-  erb :'customer/shipping'
-end
 
 post '/customer/shipping' do
   check_user
@@ -136,16 +129,36 @@ post '/customer/shipping' do
   user.postalcode = params[:postalcode]
   user.phone = params[:phone]
   user.save
+  redirect 'customer/index'
 end
 
-get '/customer/order' do
+post '/customer/order' do
   check_user
+  user = User.find_by(id: session[:user_id])
+
+
+  redirect 'customer/index'
+end
+
+post '/customer/compliment' do
+  check_user
+  user = User.find_by(id: session[:user_id])
+  @result = params['orig']
+  redirect 'customer/index'
+end
+
+post '/customer/complaint' do
+  check_user
+  user = User.find_by(id: session[:user_id])
+  redirect 'customer/index'
 end
 
 # get '/employee' do
 #   check_user && is_employee
 #   erb :'employee/index'
 # end
+
+
 
 # get '/employee/compliments' do
 #   check_user && is_employee
@@ -162,19 +175,14 @@ end
 #   erb :'employee/orderhistory'
 # end
 
+
 # get '/employee/nextorders' do
 #   check_user && is_employee
 #   erb :'employee/nextorders'
 # end
 
-# get '/customer/comments' do
-#   erb :'customer/new'
-# end
-
-# post 'customer/comments' do
-#   erb :'customer/new'
-# end
 
 # get '/newuser' do
 #   erb :newuser
 # end
+
