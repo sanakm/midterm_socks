@@ -91,19 +91,9 @@ get '/customer/index' do
   erb :'customer/index'
 end
 
-get '/customer/profile' do
-  check_user
-  erb :'customer/profile'
-end
-
 post '/customer/index' do
   check_user
   erb :'customer/index'
-end
-
-get '/customer/profile' do
-  check_user
-  erb :'customer/profile'
 end
 
 post '/customer/profile' do
