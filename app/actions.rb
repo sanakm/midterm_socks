@@ -117,9 +117,16 @@ end
 
 post '/customer/order' do
   check_user
-
   user = User.find_by(id: session[:user_id])
 
+
+  redirect 'customer/index'
+end
+
+post '/customer/compliment' do
+  check_user
+  user = User.find_by(id: session[:user_id])
+  @result = params['orig']
   redirect 'customer/index'
 end
 
