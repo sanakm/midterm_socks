@@ -129,6 +129,25 @@ get '/employee' do
   erb :'employee/index'
 end
 
+# get '/employee/compliments' do
+#   check_user && is_employee
+#   erb :'employee/compliments'
+# end
+
+# get '/employee/complaints' do
+#   check_user && is_employee
+#   erb :'employee/complaints'
+# end
+
+# get '/employee/orderhistory' do
+#   check_user && is_employee
+#   erb :'employee/orderhistory'
+# end
+
+# get '/employee/nextorders' do
+#   check_user && is_employee
+#   erb :'employee/nextorders'
+# end
 
 # get '/customer/comments' do
 #   erb :'customer/new'
