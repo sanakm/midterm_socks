@@ -47,7 +47,48 @@ end
 # end
 #ORDERS
 
+# TODO customer_comments
+
 get '/' do
+  @customer_names = ["~Anon", "~Anon", "~Anon"]
+  @customer_comments = ["This is bound to change everything", "Okay, I need to up my subscription. Stupid gnomes...", "I love the socks!"]
+
+    #TODO Refactor this block, make it as a helper.
+  @all_compliments = Comment.where(feedback: "compliment")
+  if @all_compliments.length > 2
+    #pull random compliments
+    @random = rand(@all_compliments.length - 1)
+    @compliment1 = @all_compliments[@random]
+    @all_compliments.delete_at(@random)
+    @random = rand(@all_compliments.length - 1)
+    @compliment2 =  @all_compliments[@random]
+    @all_compliments.delete_at(@random)
+    @random = rand(@all_compliments.length - 1)
+    @compliment3 =  @all_compliments[@random]
+
+    @customer_names[0] = User.find_by(id: @complement1.users_id).name unless User.find_by(id: @complement1.users_id).nil?
+    @customer_names[1] = User.find_by(id: @complement2.users_id).name unless User.find_by(id: @complement2.users_id).nil?
+    @customer_names[2] = User.find_by(id: @complement3.users_id).name unless User.find_by(id: @complement2.users_id).nil?
+
+    @customer_comments[0] = @compliment1.description
+    @customer_comments[1] = @compliment2.description
+    @customer_comments[2] = @compliment3.description
+
+
+  elsif @all_compliments.length == 2
+    @customer_names[0] = User.find_by(id: @all_compliments[0].users_id).name unless User.find_by(id: @all_compliments[0].users_id).nil?
+    @customer_names[1] = User.find_by(id: @all_compliments[1].users_id).name unless User.find_by(id: @all_compliments[1].users_id).nil?
+
+    @customer_comments[0] = @all_compliments[0].description
+    @customer_comments[1] = @all_compliments[1].description
+
+
+  elsif @all_compliments.length == 1
+    @customer_names[0] = User.find_by(id: @all_compliments[0].users_id).name unless User.find_by(id: @all_compliments[0].users_id).nil?
+User
+    @customer_comments[0] = @all_compliments[0].description
+  end
+
   erb :index
 end
 
@@ -72,6 +113,10 @@ post '/login' do
     session[:login_error] = "The email or password you've entered doesn't match any account."
     redirect '/login'
   end
+end
+
+get '/home' do
+  redirect '/logout'
 end
 
 get '/logout' do
@@ -107,6 +152,17 @@ end
 
 get '/customer/index' do
   check_user
+  @user = User.find_by(id: session[:user_id])
+  @order = Order.where(users_id: @user.id)
+  @subscription = []
+  @order.each do |i|
+    order_date = i.order_made
+    order_title = Service.find_by(id: i.id).name
+    order_socks = Service.find_by(id: i.id).socks_per_month
+    order_cost = Service.find_by(id: i.id).cost
+    @subscription.push({:date => order_date, :title => order_title, :socks => order_socks, :cost => order_cost})
+  end
+
   erb :'customer'
 end
 
@@ -130,17 +186,20 @@ post '/customer/shipping' do
   redirect '/customer/index'
 end
 
-post '/customer/order' do
+post '/customer/change_order' do
   check_user
   user = User.find_by(id: session[:user_id])
-
-  redirect '/customer/index'
-end
-
-post '/customer/history' do
-  check_user
-  user = User.find_by(id: session[:user_id])
-
+  a = params[:order]
+  case a
+  when "1"
+    user.services_id = a.to_i
+  when "2"
+    user.services_id = a.to_i
+  when "3"
+    user.services_id = a.to_i
+  when "4"
+    user.services_id = a.to_i
+  end
   redirect '/customer/index'
 end
 
