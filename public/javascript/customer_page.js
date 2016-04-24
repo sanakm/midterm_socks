@@ -1,5 +1,5 @@
 function initPage(){
-  $("#post_complement").hide();
+  $("#post_compliment").hide();
   $("#post_complaint").hide();
   $("#view_past_orders").hide();
   $("#edit_order").hide();
@@ -12,7 +12,7 @@ function initPage(){
 }
 
 function showCustomerLanding() {
-  $("#post_complement").hide();
+  $("#post_compliment").hide();
   $("#post_complaint").hide();
   $("#view_past_orders").hide();
   $("#edit_order").hide();
@@ -22,7 +22,7 @@ function showCustomerLanding() {
 }
 
 function showProfile(){
-  $("#post_complement").hide();
+  $("#post_compliment").hide();
   $("#post_complaint").hide();
   $("#view_past_orders").hide();
   $("#edit_order").hide();
@@ -32,7 +32,7 @@ function showProfile(){
 }
 
 function showEditShipping(){
-  $("#post_complement").hide();
+  $("#post_compliment").hide();
   $("#post_complaint").hide();
   $("#view_past_orders").hide();
   $("#edit_order").hide();
@@ -42,7 +42,7 @@ function showEditShipping(){
 }
 
 function showEditOrder(){
-  $("#post_complement").hide();
+  $("#post_compliment").hide();
   $("#post_complaint").hide();
   $("#view_past_orders").hide();
   $("#edit_order").show();
@@ -51,7 +51,7 @@ function showEditOrder(){
   $("#default_stuff").hide();
 }
 function showViewOrderHistory(){
-  $("#post_complement").hide();
+  $("#post_compliment").hide();
   $("#post_complaint").hide();
   $("#view_past_orders").show();
   $("#edit_order").hide();
@@ -61,7 +61,7 @@ function showViewOrderHistory(){
 }
 
 function showMakeAComplaint(){
-  $("#post_complement").hide();
+  $("#post_compliment").hide();
   $("#post_complaint").show();
   $("#view_past_orders").hide();
   $("#edit_order").hide();
@@ -71,7 +71,7 @@ function showMakeAComplaint(){
 }
 
 function showMakeACompliment(){
-  $("#post_complement").show();
+  $("#post_compliment").show();
   $("#post_complaint").hide();
   $("#view_past_orders").hide();
   $("#edit_order").hide();

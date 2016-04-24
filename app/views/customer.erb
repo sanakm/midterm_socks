@@ -63,10 +63,10 @@
                     <a id = "sosorry">Post Complaint</a>
                 </li>
                 <li>
-                    <a id = "attaboy">Post Complement</a>
+                    <a id = "attaboy">Post Compliment</a>
                 </li>
                 <li>
-                    <a href="mailto:name@email.com">Contact Us!</a>
+                    <a href="">Contact Us!</a>
                 </li>
                 <li>
                   <a href="/logout">Sign Out</a>
@@ -84,23 +84,26 @@
                             <h1> Welcome back, <%= @user.name %></h1>
                         </div>
 
-                        <div class="container" id="edit_profile">
+                        <form>
 
+                        <div class="container" id="edit_profile">
+                          <div class="form-group">
                         <h2>Profile Info</h2>
 
-                        <p> Still todo: Change the password</p>
+                        <p> Changing your name? Changing your email? We're cool with that...</p>
 
                         <form method="POST" action='/customer/profile'>
 
                           <label>Name:</label>
-                          <input type="text" name="name" value="<%= @user.name %>">
+                          <input class ="form-control" type="text" name="name" value="<%= @user.name %>">
 
                           <label>Email:</label>
-                          <input type="text" name="email" value="<%= @user.email %>">
+                          <input class ="form-control" type="text" name="email" value="<%= @user.email %>">
 
-                          <p><input type="submit" value="Go!"></p>
+                          <p><input class="btn btn-primary" type="submit" value="Go!"></p>
 
                         </form>
+                      </div>
                       </div>
 
                         <div class="container" id="edit_shipping">
@@ -138,7 +141,7 @@
 
                           <input type="radio" name="order" value=3> The Miser<br>
 
-                          <input type="radio" name="order" value=4> Dilettanten 
+                          <input type="radio" name="order" value=4> Dilettanten
 
                           <p><input type="submit" value="Go!"></p>
 
@@ -172,18 +175,20 @@
 
                       <h2>Post Complaint</h2>
 
-                      <form action='/customer/compliment' method="post">
+                      <form action='/customer/complaint' method="post">
                       <textarea rows="4" cols="30" name="orig" placeholder="Enter text here.."></textarea>
                       <button type="submit">Submit</button>
                       </form>
                     </div>
 
-                  <div class="container" id="post_complement">
+                  <div class="container" id="post_compliment">
 
 
-                    <h1>Customer Complaint</h1>
+                    <h1>Have Something Nice to Say?</h1>
 
-                    <form action='/customer/complaint' method="post">
+                    <p>This is fantastic news! Let us know what went well for you, and we'll let the whole world know :)</p>
+
+                    <form action='/customer/compliment' method="post">
                     <textarea rows="4" cols="30" name="orig" placeholder="Enter text here.."></textarea>
                     <button type="submit">Submit</button>
                     </form>
