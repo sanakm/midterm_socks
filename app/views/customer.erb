@@ -151,8 +151,15 @@
                       <div class="container" id="view_past_orders">
 
                       <h2>View Past Orders</h2>
-                      <p><%= @user.name %></p>
-                      <p><%  %></p>
+                      <ul>
+                        <% @subscription.each do |subs| %>
+                            <% subs.each do |key, value| %>
+                        <li>
+                          <p><%= key %> : <%= value %></p>                          
+                        </li>
+                          <% end %>
+                        <% end %>
+                      </ul>
 
 
                                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nec metus at lectus pellentesque tincidunt eu ac erat. Vivamus volutpat risus eu nunc iaculis convallis. Morbi congue gravida diam, et venenatis est molestie id. Ut libero felis, sagittis a mi sed, varius lobortis lorem. Ut lobortis, nibh vitae tempor ultrices, sem dui mollis dui, id ultrices magna quam euismod lacus. Maecenas eu nulla quis massa ullamcorper porttitor. In consectetur hendrerit justo finibus elementum.
