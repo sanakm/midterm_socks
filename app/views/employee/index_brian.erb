@@ -68,7 +68,7 @@
                 <div class="row">
                     <div class="col-lg-12" >
                         <div class="container" id="default_view">
-                            <h1> Welcome Back (name of employee)</h1>
+                            <h1> Welcome Back, <%= @user.name %></h1>
 
                             Idea for this page: How many days until we ship next orders (a simple time calc)
                         </div>
@@ -93,6 +93,14 @@
                           <h2>View all, and action complaints</h2>
 
                           <p>In this table, we're looking at the types of complaints, and the date of the complaint. Further action includes creating a way to show we followed up on the complaint.</p>
+                          <h1>Customer Complaints:</h1>
+                          <% @complaints.each do |complaint| %>
+                          <h3><%= complaint.description %></h3>
+                          <p>
+                            Complaint posted by <%=User.find_by(id: complaint.users_id).name %> - <%=User.find_by(id: complaint.users_id).email %>
+                          </p>
+                          </div>
+                          <% end %>
                         </div>
                         <div class="container" id="view_approve_compliments">
 
@@ -100,10 +108,13 @@
                           <p>In this table, we want to be able to review and approve comments. Here, there should be two tables.
                             The first table is the non-approved comments. Here, each one should be able to be deleted, or approved.
                             The second table should include approved comments only. No need to have a delete method. </p>
+                    
+                            </div>
+                            
                             </div>
                           </div>
                         </div>
                       <!-- /#page-content-wrapper -->
 
                     </div>
-    <!-- /#wrapper -->
+    <!-- /#wrapper --> 
