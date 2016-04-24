@@ -1,0 +1,28 @@
+<h1>Customer Compliments</h1>
+<% @compliments.each do |compliment| %>
+
+<h3><%= compliment.description %></h3>
+<p>
+  Compliment posted by <%= compliment.user.name %> - <%= compliment.user.email %>
+</p>
+</div>
+<% end %>
+
+<h1>Customer Complaints</h1>
+<% @complaints.each do |complaint| %>
+
+<h3><%= complaint.description %></h3>
+<p>
+  Complaint posted by <%= complaint.user.name %> - <%= complaint.user.email %>
+</p>
+</div>
+<% end %>
+
+<h1>Shipped Orders History</h1>
+<% @orders.each do |order| %>
+
+<h3>Date of Order<%= order.order_made %></h3>
+<h3>Name of Person<%= order.user.name %></h3>
+<h3>Address Shipped: <%= order.user.address %></h3>
+<h3>Order Type: <%= order.service.name %></h3>
+<% end %>

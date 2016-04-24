@@ -16,6 +16,7 @@ helpers do
   def is_employee?
     @user = User.find_by(id: session[:user_id])
     if @user.account_type
+      # binding.pry
      session.delete(:login_error)
    else
     session[:login_error] = "You are not authorized to see this page"
@@ -26,15 +27,25 @@ helpers do
 end
 
 # TODO REMOVE ONCE EMPLPOYEE PAGES ARE CONSOLIDATED
-get '/brian_employee' do
-  check_user && is_employee
-  erb :'employee/index_brian'
-end
+# get '/brian_employee' do
+#   check_user && is_employee
+#   erb :'employee/index_brian'
+# end
 
 get '/brian_employee' do
-  @comments = Comment.all
+  check_user && is_employee?
+  @compliments = Comment.where(feedback: "compliment").order(created_at: :desc)
+  @complaints = Comment.where(feedback: "complaint").order(created_at: :desc)
   erb :'employee/index_brian'
 end
+#COMMENTS
+
+# get '/brian_employee' do
+#   check_user && is_employee
+#   @orders = Order.all
+#   erb :'employee/index_brian'
+# end
+#ORDERS
 
 # TODO customer_comments
 
@@ -90,6 +101,7 @@ post '/login' do
   email = params[:email]
   password = params[:password]
   user = User.find_by(email: email, password_digest: password)
+  # binding.pry
   if user
     session[:user_id] = user.id
     if user.account_type
@@ -207,29 +219,12 @@ post '/customer/complaint' do
   redirect 'customer/index'
 end
 
+
 # get '/employee' do
 #   check_user && is_employee
 #   erb :'employee/index'
 # end
 
-
-get '/employee' do
-  check_user && is_employee
-  erb :'employee/index'
-end
-
-
-
-
-# get '/employee/compliments' do
-#   check_user && is_employee
-#   erb :'employee/compliments'
-# end
-
-# get '/employee/complaints' do
-#   check_user && is_employee
-#   erb :'employee/complaints'
-# end
 
 # get '/employee/orderhistory' do
 #   check_user && is_employee
