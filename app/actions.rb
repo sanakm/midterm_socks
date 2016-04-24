@@ -95,6 +95,7 @@ end
 
 get '/customer/index' do
   check_user
+  binding.pry
   erb :'customer'
 end
 
