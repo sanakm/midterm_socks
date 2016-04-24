@@ -147,13 +147,15 @@ get '/customer/index' do
   check_user
   @user = User.find_by(id: session[:user_id])
   @order = Order.where(users_id: @user.id)
-  foo = []
+  @subscription = []
   @order.each do |i|
     order_date = i.order_made
     order_title = Service.find_by(id: i.id).name
     order_socks = Service.find_by(id: i.id).socks_per_month
     order_cost = Service.find_by(id: i.id).cost
+    @subscription.push({:date => order_date, :title => order_title, :socks => order_socks, :cost => order_cost})
   end
+
   erb :'customer'
 end
 
