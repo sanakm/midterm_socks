@@ -95,6 +95,15 @@ end
 
 get '/customer/index' do
   check_user
+  @user = User.find_by(id: session[:user_id])
+  @order = Order.where(users_id: @user.id)
+  foo = []
+  @order.each do |i|
+    order_date = i.order_made
+    order_title = Service.find_by(id: i.id).name
+    order_socks = Service.find_by(id: i.id).socks_per_month
+    order_cost = Service.find_by(id: i.id).cost
+  end
   erb :'customer'
 end
 
@@ -118,17 +127,20 @@ post '/customer/shipping' do
   redirect '/customer/index'
 end
 
-post '/customer/order' do
+post '/customer/change_order' do
   check_user
   user = User.find_by(id: session[:user_id])
-
-  redirect '/customer/index'
-end
-
-post '/customer/history' do
-  check_user
-  user = User.find_by(id: session[:user_id])
-
+  a = params[:order]
+  case a
+  when "1"
+    user.services_id = a.to_i
+  when "2"
+    user.services_id = a.to_i
+  when "3"
+    user.services_id = a.to_i
+  when "4"
+    user.services_id = a.to_i
+  end
   redirect '/customer/index'
 end
 
