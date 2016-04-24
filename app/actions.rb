@@ -1,4 +1,5 @@
 require 'pry'
+require 'bcrypt'
 
 helpers do
 
@@ -15,6 +16,7 @@ helpers do
   def is_employee?
     @user = User.find_by(id: session[:user_id])
     if @user.account_type
+      # binding.pry
      session.delete(:login_error)
    else
     session[:login_error] = "You are not authorized to see this page"
@@ -31,19 +33,18 @@ end
 # end
 
 get '/brian_employee' do
-  check_user && is_employee
+  check_user && is_employee?
   @compliments = Comment.where(feedback: "compliment").order(created_at: :desc)
   @complaints = Comment.where(feedback: "complaint").order(created_at: :desc)
-  binding.pry
   erb :'employee/index_brian'
 end
 #COMMENTS
 
-get '/brian_employee' do
-  check_user && is_employee
-  @orders = Order.all
-  erb :'employee/index_brian'
-end
+# get '/brian_employee' do
+#   check_user && is_employee
+#   @orders = Order.all
+#   erb :'employee/index_brian'
+# end
 #ORDERS
 
 get '/' do
@@ -58,18 +59,14 @@ end
 post '/login' do
   email = params[:email]
   password = params[:password]
-  user = User.find_by(email: email)
+  user = User.find_by(email: email, password_digest: password)
+  # binding.pry
   if user
-    if user.authenticate(password)
-      session[:user_id] = user.id
-      if user.account_type
-        redirect '/brian_employee'
-      else
-        redirect '/customer'
-      end
+    session[:user_id] = user.id
+    if user.account_type
+      redirect '/brian_employee'
     else
-      session[:login_error] = "The password you've entered is incorrect."
-      redirect '/login'
+      redirect '/customer/index'
     end
   else
     session[:login_error] = "The email or password you've entered doesn't match any account."
@@ -98,10 +95,8 @@ post '/customer/checkout' do
     city: params[:city],
     postalcode: params[:postalcode],
     phone: params[:phone],
-    #services_id: session[:service_id]
+    services_id: session[:service_id]
     )
-
-
   if @user.save
     session[:user_id] = @user.id
     redirect '/customer/index'
@@ -138,6 +133,14 @@ end
 post '/customer/order' do
   check_user
   user = User.find_by(id: session[:user_id])
+
+  redirect '/customer/index'
+end
+
+post '/customer/history' do
+  check_user
+  user = User.find_by(id: session[:user_id])
+
   redirect '/customer/index'
 end
 
