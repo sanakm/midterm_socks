@@ -44,7 +44,6 @@ get '/' do
 
     #TODO Refactor this block, make it as a helper.
   @all_compliments = Comment.where(feedback: "compliment")
-  binding.pry
   if @all_compliments.length > 2
     #pull random compliments
     @random = rand(@all_compliments.length - 1)
@@ -104,6 +103,10 @@ post '/login' do
   end
 end
 
+get '/home' do
+  redirect '/logout'
+end
+
 get '/logout' do
   session[:user_id] = nil
   redirect '/'
@@ -137,7 +140,6 @@ end
 
 get '/customer/index' do
   check_user
-  binding.pry
   erb :'customer'
 end
 

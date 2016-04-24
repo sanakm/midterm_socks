@@ -680,15 +680,22 @@ html {
 .pricing-table-1 .favorite .price strong {
   left: -8px;
 }
-.pricing-table-1 .green h3 {
-  background: #7ac673;
+.pricing-table-1 .one h3 {
+  background: #E8860C;
 }
-.pricing-table-1 .blue h3 {
-  background: #27aae0;
+.pricing-table-1 .two h3 {
+  background: #FF2000;
 }
-.pricing-table-1 .orange h3 {
-  background: #faaf40;
+.pricing-table-1 .three h3 {
+  background: #E30CE8;
 }
+
+.pricing-table-1 .four h3{
+  background: #502CFF;
+}
+
+
+
 @media (max-width: 767px) {
   .pricing-table-1 {
     padding: 30px 20px 10px 20px;
