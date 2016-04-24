@@ -25,15 +25,26 @@ helpers do
 end
 
 # TODO REMOVE ONCE EMPLPOYEE PAGES ARE CONSOLIDATED
-get '/brian_employee' do
-  check_user && is_employee
-  erb :'employee/index_brian'
-end
+# get '/brian_employee' do
+#   check_user && is_employee
+#   erb :'employee/index_brian'
+# end
 
 get '/brian_employee' do
-  @comments = Comment.all
+  check_user && is_employee
+  @compliments = Comment.where(feedback: "compliment").order(created_at: :desc)
+  @complaints = Comment.where(feedback: "complaint").order(created_at: :desc)
+  binding.pry
   erb :'employee/index_brian'
 end
+#COMMENTS
+
+get '/brian_employee' do
+  check_user && is_employee
+  @orders = Order.all
+  erb :'employee/index_brian'
+end
+#ORDERS
 
 get '/' do
   erb :index
@@ -146,29 +157,12 @@ post '/customer/complaint' do
   redirect 'customer/index'
 end
 
+
 # get '/employee' do
 #   check_user && is_employee
 #   erb :'employee/index'
 # end
 
-
-get '/employee' do
-  check_user && is_employee
-  erb :'employee/index'
-end
-
-
-
-
-# get '/employee/compliments' do
-#   check_user && is_employee
-#   erb :'employee/compliments'
-# end
-
-# get '/employee/complaints' do
-#   check_user && is_employee
-#   erb :'employee/complaints'
-# end
 
 # get '/employee/orderhistory' do
 #   check_user && is_employee
