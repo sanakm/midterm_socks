@@ -63,10 +63,10 @@
                     <a id = "sosorry">Post Complaint</a>
                 </li>
                 <li>
-                    <a id = "attaboy">Post Complement</a>
+                    <a id = "attaboy">Post Compliment</a>
                 </li>
                 <li>
-                    <a href="mailto:name@email.com">Contact Us!</a>
+                    <a href="">Contact Us!</a>
                 </li>
                 <li>
                   <a href="/logout">Sign Out</a>
@@ -79,52 +79,66 @@
         <div id="page-content-wrapper" >
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-12" >
+                    <div class="col-lg-8" >
                         <div class="container" id="default_stuff">
                             <h1> Welcome back, <%= @user.name %></h1>
                         </div>
 
+                        <form>
+
                         <div class="container" id="edit_profile">
+                          <div class="col-md-6">
+                          <h2>Profile Info</h2>
 
-                        <h2>Profile Info</h2>
+                          <p> Changing your name? Changing your email? We're cool with that...</p>
 
-                        <p> Still todo: Change the password</p>
-
-                        <form method="POST" action='/customer/profile'>
-
-                          <label>Name:</label>
-                          <input type="text" name="name" value="<%= @user.name %>">
-
-                          <label>Email:</label>
-                          <input type="text" name="email" value="<%= @user.email %>">
-
-                          <p><input type="submit" value="Go!"></p>
+                          <form method="POST" action='/customer/profile'>
+                            <div class="form-group">
+                              <label>Name:</label>
+                              <input class ="form-control" type="text" name="name" value="<%= @user.name %>">
+                            </div>
+                            <div class="form-group">
+                              <label>Email:</label>
+                              <input class ="form-control" type="text" name="email" value="<%= @user.email %>">
+                            </div>
+                            <p><input class="btn btn-primary" type="submit" value="Go!"></p>
 
                         </form>
                       </div>
+                      </div>
 
                         <div class="container" id="edit_shipping">
+                          <div class="col-md-6">
+
 
                             <h2>Edit Shipping Deets</h2>
+                            <br><p>Okay, so you're moving I hear... Throw in the location of your new digs, and you'll still receive the best socks to your new door!</p<br>
 
-                            <form method="POST" action='/customer/shipping'>
 
-                              <label>Address:</label>
-                              <input type="text" name="address" value="<%= @user.address %>">
+                            <form class="form-group" method="POST" action='/customer/shipping'>
+                              <div class="form-group">
+                                <label class="control-label">Address:</label>
+                                <input class ="form-control" type="text" name="address" value="<%= @user.address %>">
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label">City:</label>
+                                <input class ="form-control" type="text" name="city" value="<%= @user.city %>">
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label">Postal Code:</label>
+                                <input class ="form-control" type="text" name="postalcode" value="<%= @user.postalcode %>">
+                              </div>
 
-                              <label>City:</label>
-                              <input type="text" name="city" value="<%= @user.city %>">
+                              <div class="form-group">
+                                <label class="control-label">Phone:</label>
+                                <input class ="form-control" type="text" name="phone" value="<%= @user.phone %>">
+                              </div>
 
-                              <label>Postal Code:</label>
-                              <input type="text" name="postalcode" value="<%= @user.postalcode %>">
-
-                              <label>Phone:</label>
-                              <input type="text" name="phone" value="<%= @user.phone %>">
-
-                              <p><input type="submit" value="Go!"></p>
+                              <p><input class="btn btn-danger" type="submit" value="Go!"></p>
 
                             </form>
                           </div>
+                        </div>
 
                       <div class="container" id="edit_order">
 
@@ -138,7 +152,7 @@
 
                           <input type="radio" name="order" value=3> The Miser<br>
 
-                          <input type="radio" name="order" value=4> Dilettanten 
+                          <input type="radio" name="order" value=4> Dilettanten
 
                           <p><input type="submit" value="Go!"></p>
 
@@ -152,7 +166,7 @@
                         <% @subscription.each do |subs| %>
                             <% subs.each do |key, value| %>
                         <li>
-                          <p><%= key %> : <%= value %></p>                          
+                          <p><%= key %> : <%= value %></p>
                         </li>
                           <% end %>
                         <% end %>
@@ -179,18 +193,20 @@
 
                       <h2>Post Complaint</h2>
 
-                      <form action='/customer/compliment' method="post">
+                      <form action='/customer/complaint' method="post">
                       <textarea rows="4" cols="30" name="orig" placeholder="Enter text here.."></textarea>
                       <button type="submit">Submit</button>
                       </form>
                     </div>
 
-                  <div class="container" id="post_complement">
+                  <div class="container" id="post_compliment">
 
 
-                    <h1>Customer Complaint</h1>
+                    <h1>Have Something Nice to Say?</h1>
 
-                    <form action='/customer/complaint' method="post">
+                    <p>This is fantastic news! Let us know what went well for you, and we'll let the whole world know :)</p>
+
+                    <form action='/customer/compliment' method="post">
                     <textarea rows="4" cols="30" name="orig" placeholder="Enter text here.."></textarea>
                     <button type="submit">Submit</button>
                     </form>

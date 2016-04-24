@@ -42,29 +42,35 @@ get '/' do
   @customer_names = ["~Anon", "~Anon", "~Anon"]
   @customer_comments = ["This is bound to change everything", "Okay, I need to up my subscription. Stupid gnomes...", "I love the socks!"]
 
-    #TODO Refactor this block, make it as a helper.
-  @all_compliments = Comment.where(feedback: "compliment")
-  if @all_compliments.length > 2
-    #pull random compliments
-    @random = rand(@all_compliments.length - 1)
-    @compliment1 = @all_compliments[@random]
-    @all_compliments.delete_at(@random)
-    @random = rand(@all_compliments.length - 1)
-    @compliment2 =  @all_compliments[@random]
-    @all_compliments.delete_at(@random)
-    @random = rand(@all_compliments.length - 1)
-    @compliment3 =  @all_compliments[@random]
+  #TODO Refactor this block, make it as a helper.
+  @results_compliments = Comment.where(feedback: "compliment")
+  @compliments_array = []
+  @results_compliments.each do |compliment|
+    @compliments_array.push(compliment)
+  end
 
-    @customer_names[0] = User.find_by(id: @complement1.users_id).name unless User.find_by(id: @complement1.users_id).nil?
-    @customer_names[1] = User.find_by(id: @complement2.users_id).name unless User.find_by(id: @complement2.users_id).nil?
-    @customer_names[2] = User.find_by(id: @complement3.users_id).name unless User.find_by(id: @complement2.users_id).nil?
+  if @results_compliments.length > 2
+    #pull random compliments
+    # TODO problem with compliments - bug where names doesn't match compliment.
+    @random = rand(@compliments_array.length - 1)
+    @compliment1 = @compliments_array[@random]
+    @compliments_array.delete_at(@random)
+    @random = rand(@compliments_array.length - 1)
+    @compliment2 =  @compliments_array[@random]
+    @compliments_array.delete_at(@random)
+    @random = rand(@compliments_array.length - 1)
+    @compliment3 =  @compliments_array[@random]
+
+    @customer_names[0] = User.find_by(id: @compliment1.users_id).name unless User.find_by(id: @compliment1.users_id).nil?
+    @customer_names[1] = User.find_by(id: @compliment2.users_id).name unless User.find_by(id: @compliment2.users_id).nil?
+    @customer_names[2] = User.find_by(id: @compliment3.users_id).name unless User.find_by(id: @compliment2.users_id).nil?
 
     @customer_comments[0] = @compliment1.description
     @customer_comments[1] = @compliment2.description
     @customer_comments[2] = @compliment3.description
 
 
-  elsif @all_compliments.length == 2
+  elsif @results_compliments.length == 2
     @customer_names[0] = User.find_by(id: @all_compliments[0].users_id).name unless User.find_by(id: @all_compliments[0].users_id).nil?
     @customer_names[1] = User.find_by(id: @all_compliments[1].users_id).name unless User.find_by(id: @all_compliments[1].users_id).nil?
 
@@ -72,9 +78,8 @@ get '/' do
     @customer_comments[1] = @all_compliments[1].description
 
 
-  elsif @all_compliments.length == 1
+  elsif @results_compliments.length == 1
     @customer_names[0] = User.find_by(id: @all_compliments[0].users_id).name unless User.find_by(id: @all_compliments[0].users_id).nil?
-User
     @customer_comments[0] = @all_compliments[0].description
   end
 
